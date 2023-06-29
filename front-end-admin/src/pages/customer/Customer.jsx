@@ -1,18 +1,18 @@
 import React from 'react';
 import { Image, Table, Button, Popconfirm, Form, Input, message, Space, Modal, InputNumber, Select, Upload } from 'antd';
-import { DeleteOutlined, EditOutlined, UploadOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, } from '@ant-design/icons';
 
 import { axiosClient } from '../../libraries/axiosClient';
-import moment from 'moment';
 import numeral from 'numeral';
-import { API_URL } from '../../constants/URLS';
-import axios from 'axios';
+
+
 
 export default function Customer() {
   const [isPreview, setIsPreview] = React.useState(false);
   const [customer, setCustomer] = React.useState([]);
   const [selectedRecord, setSelectedRecord] = React.useState(null);
   const [refresh, setRefresh] = React.useState(0);
+  const [editFormVisible, setEditFormVisible] = React.useState(false);
 
 
   const [file, setFile] = React.useState(null);
@@ -62,6 +62,14 @@ export default function Customer() {
       },
     },
     {
+      title: 'Trạng thái',
+      dataIndex: 'trangthai',
+      key: 'trangthai',
+      render: (text) => {
+        return <span>{text}</span>;
+      },
+    },
+    {
       title: '',
       key: 'action',
       render: (text, record) => {
@@ -94,7 +102,7 @@ export default function Customer() {
               onConfirm={() => {
                 const id = record._id;
                 axiosClient
-                  .delete('/product/' + id)
+                  .delete('/customer/' + id)
                   .then((response) => {
                     message.success('Xóa thành công!');
                     setRefresh((f) => f + 1);
@@ -111,38 +119,16 @@ export default function Customer() {
               <Button danger type='dashed' icon={<DeleteOutlined />} />
             </Popconfirm>
              {/*BUTTON UPDATE DỮ LIỆU */}
-            <Button
+             <Button
               type='dashed'
               icon={<EditOutlined />}
               onClick={() => {
                 setSelectedRecord(record);
                 console.log('Selected Record', record);
                 updateForm.setFieldsValue(record);
-            
+                setEditFormVisible(true);
               }}
             />
-            {/*BUTTON UPLOAD ẢNH */}
-            <Upload
-              showUploadList={false}
-              name='file'
-              action={API_URL + '/upload/products/' + record._id}
-              headers={{ authorization: 'authorization-text' }}
-              onChange={(info) => {
-                if (info.file.status !== 'uploading') {
-                  console.log(info.file, info.fileList);
-                }
-
-                if (info.file.status === 'done') {
-                  message.success(`${info.file.name} file uploaded successfully`);
-
-                  setRefresh((f) => f + 1);
-                } else if (info.file.status === 'error') {
-                  message.error(`${info.file.name} file upload failed.`);
-                }
-              }}
-            >
-              <Button icon={<UploadOutlined />} />
-            </Upload>
           </Space>
         );
       },
@@ -160,23 +146,12 @@ export default function Customer() {
 // POST DỮ LIỆU
   const onFinish = (values) => {
     axiosClient
-      .post('/product', values)
+      .post('/customer', values)
       .then((response) => {
         const { _id } = response.data;
 
         const formData = new FormData();
         formData.append('file', file);
-//POST ẢNH
-        axios
-          .post(API_URL + '/upload/products/' + _id, formData)
-          .then((respose) => {
-            message.success('Thêm mới thành công!');
-            createForm.resetFields();
-            setRefresh((f) => f + 1);
-          })
-          .catch((err) => {
-            message.error('Upload file bị lỗi!');
-          });
       })
       .catch((err) => {
         message.error('Thêm mới bị lỗi!');
@@ -188,11 +163,12 @@ export default function Customer() {
 // UPDATE DỮ LIỆU
   const onUpdateFinish = (values) => {
     axiosClient
-      .patch('/product/' + selectedRecord._id, values)
+      .patch('/customer/' + selectedRecord._id, values)
       .then((response) => {
         message.success('Cập nhật thành công!');
         updateForm.resetFields();
         setRefresh((f) => f + 1);
+        setEditFormVisible(false);
        
       })
       .catch((err) => {
@@ -213,16 +189,67 @@ export default function Customer() {
       <Table rowKey='_id' dataSource={customer} columns={columns} pagination={false} />
       <Modal
         centered
+        open={editFormVisible}
         title='Cập nhật thông tin'
         onOk={() => {
           updateForm.submit();
         }}
         onCancel={() => {
-        
+          setEditFormVisible(false);
         }}
         okText='Lưu thông tin'
         cancelText='Đóng'
       >
+        {/* FORM UPDATE SẢN PHẨM */}
+        <Form form={updateForm} name='update-form' labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} initialValues={{ remember: true }} onFinish={onUpdateFinish} onFinishFailed={onUpdateFinishFailed} autoComplete='on'>
+          <Form.Item label='Tên khách hàng' name='fullname' rules={[{ required: true, message: 'Chưa nhập Tên khách hàng' }]} hasFeedback>
+            <Input />
+          </Form.Item>
+
+          <Form.Item label='Số điện thoại' name='phone' rules={[{ required: true, message: 'Chưa nhập Số điện thoại' }]} hasFeedback>
+            <InputNumber style={{ minWidth: 300 }} />
+          </Form.Item>
+
+          <Form.Item label='Địa chỉ liên hệ' name='address'>
+            <Input />
+          </Form.Item>
+          <Form.Item label='Tổng số lượng sản phẩm' name='tongsoluong'>
+            <InputNumber />
+          </Form.Item>
+          <Form.Item label='Tổng thanh toán' name='tongtien'>
+          <InputNumber />
+        </Form.Item>
+        <Form.Item label='Trạng thái' name='trangthai' rules={[{ required: true, message: 'error' }]} hasFeedback>
+            <Select
+              options={[
+                {
+                  value: 'Đã xác nhận',
+                  label: 'Đã xác nhận',
+                },
+                {
+                  value: 'Đang vận chuyển',
+                  label: 'Đang vận chuyển',
+                },
+                {
+                  value: 'Giao hàng',
+                  label: 'Giao hàng',
+                },
+                {
+                  value: 'Hủy bỏ',
+                  label: 'Hủy bỏ',
+                },
+                {
+                  value: 'Hoàn trả',
+                  label: 'Hoàn trả',
+                },
+                {
+                  value: 'Đã hoàn trả',
+                  label: 'Đã hoàn trả',
+                },
+              ]}
+            />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );
