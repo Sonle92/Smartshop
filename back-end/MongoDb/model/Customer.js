@@ -15,7 +15,8 @@ const customersSchema = new Schema({
     address: { type: String },
     cartItems:[],
     tongtien:{ type: Number},
-    tongsoluong:{ type: String },
+    tongsoluong:{ type: Number },
+    trangthai:{type:String},
 })
   const Customer = model("Customer", customersSchema);
   module.exports = Customer;
