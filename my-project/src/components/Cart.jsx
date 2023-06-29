@@ -28,6 +28,7 @@ export default function Cart() {
     cartItems: cart,
     tongtien:0,
     tongsoluong:0,
+    trangthai: "Đang xử lý",
   });
 //cap nhap lai tong tien va tong san pham
   useEffect(() => {
