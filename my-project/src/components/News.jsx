@@ -14,6 +14,18 @@ const newsData = [
       content: 'Theo Jeff Pu - nhà phân tích công nghệ tại Haitong International Securities, iPhone 15 Pro và iPhone 15 Pro Max sắp ra mắt của Apple có thể đi kèm với mức giá cao hơn do những nâng cấp đáng kể về phần cứng.',
       image: 'https://cdn.mobilecity.vn/mobilecity-vn/images/2023/03/theo-mot-so-don-doan-cac-mau-iphone-15-pro-co-the-tang-gia1.jpg.webp',
     },
+    {
+      id:3,
+      title:'iPhone 15 Plus có gì mới?',
+      content:'Phiên bản bộ nhớ: iPhone 15 Plus 128GB, iPhone 15 Plus 256GB, iPhone 15 Plus 512GB.Màu sắc iPhone 15 Plus: Đen, xanh dương, hồng, tím, trắng và đỏ.Thiết kế iPhone 15 Plus: Cũng như iPhone 15 tiêu chuẩn, phần tai thỏ sẽ hoàn toàn được thay thay thế bằng thiết kế màn hình đục lỗ hình viên thuốc được Apple gọi là Dynamic Island.',
+      image:'https://cdn.tgdd.vn/Files/2023/03/17/1518606/ogmacrumorscopy-100423-205920.jpg',
+    },
+    {
+      id:4,
+      title:'iPhone 15 Series có Chip Apple A17 Bionic với quy trình 3nm mới',
+      content:'Giống với iPhone 14 series, iPhone 15 cũng sẽ được Apple tiếp tục trang bị bộ vi xử lý tương tự. Tức có nghĩa là chip Apple A16 Bionic 4nm sẽ được dùng trên iPhone 15 và iPhone 15 Plus, còn các dòng Pro sẽ được trang bị con chip Apple A17 Bionic 3nm đời mới nhất..',
+      image:'https://blogcdn.muaban.net/wp-content/uploads/2023/05/24225856/iPhone-15-khi-nao-ra-mat-09.jpg',
+    },
     // Thêm các tin tức khác tại đây...
   ];
   
