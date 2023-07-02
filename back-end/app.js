@@ -5,20 +5,22 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
 
-// var indexRouter = require('./routes/index1');
+
 const connectDB = require('./config/connectDB')
+
+
 var app = express();
 //khai bao routes
-const Category=require('./routes/categories');
-const Product=require('./routes/products');
+const routes = require('./routes/index')
 const uploadRouter=require('./routes/upload');
-const Customer=require('./routes/customers');
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-connectDB()
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -28,11 +30,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 
-// app.use('/', indexRouter);
-app.use('/category',Category);
-app.use('/product',Product);
+
 app.use('/upload', uploadRouter);
-app.use('/customer', Customer);
+connectDB()
+routes(app)
+
 
 
 // catch 404 and forward to error handler
