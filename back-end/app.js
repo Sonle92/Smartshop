@@ -6,6 +6,7 @@ var logger = require('morgan');
 const cors = require('cors');
 
 // var indexRouter = require('./routes/index1');
+const connectDB = require('./config/connectDB')
 var app = express();
 //khai bao routes
 const Category=require('./routes/categories');
@@ -16,6 +17,8 @@ const Customer=require('./routes/customers');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+connectDB()
 
 app.use(logger('dev'));
 app.use(express.json());
