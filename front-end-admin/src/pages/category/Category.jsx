@@ -4,6 +4,7 @@ import { DeleteOutlined ,EditOutlined,UploadOutlined} from "@ant-design/icons";
 // import "antd/dist/antd.css";
 import axios from 'axios';
 import { API_URL } from '../../constants/URLS';
+import { axiosClient } from '../../libraries/axiosClient';
 
 
 export default function ListSp() {
@@ -61,7 +62,7 @@ export default function ListSp() {
   ];
   React.useEffect(() => {
     //lay du lieu data tu nodejs
-    axios.get(API_URL+'/category').then((response) => {
+    axiosClient.get(API_URL+'/category').then((response) => {
         // console.log(response.data);
         setcategories(response.data);
       });
