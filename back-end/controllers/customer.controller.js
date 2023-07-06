@@ -1,5 +1,4 @@
-const Customer = require('../MongoDb/model/Customer');
-
+const Customer = require("../MongoDb/model/Customer");
 // Controller function: Get all customers
 exports.getCustomers = async (req, res) => {
   try {

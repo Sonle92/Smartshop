@@ -1,10 +1,11 @@
-const Product = require('../MongoDb/model/Product');
+const Product = require("../MongoDb/model/Product");
 
+const { StatusCodes } = require("http-status-codes");
 // Lấy danh sách sản phẩm
 exports.getProducts = async (req, res, next) => {
   try {
     Product.find()
-      .populate('category')
+      .populate("category")
       .then((result) => {
         res.send(result);
       })
@@ -12,7 +13,7 @@ exports.getProducts = async (req, res, next) => {
         res.status(400).send({ message: err.message });
       });
   } catch (err) {
-    res.sendStatus(500);
+    res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
   }
 };
 
@@ -28,7 +29,7 @@ exports.getProductById = async (req, res, next) => {
         res.status(400).send({ message: err.message });
       });
   } catch (err) {
-    res.sendStatus(500);
+    res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
   }
 };
 
@@ -46,7 +47,7 @@ exports.createProduct = async (req, res, next) => {
         res.status(400).send({ message: err.message });
       });
   } catch (err) {
-    res.sendStatus(500);
+    res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
   }
 };
 
@@ -77,7 +78,7 @@ exports.updateProduct = async (req, res, next) => {
         res.status(400).send({ message: err.message });
       });
   } catch (error) {
-    res.sendStatus(500);
+    res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
   }
 };
 
@@ -93,7 +94,7 @@ exports.deleteProduct = async (req, res, next) => {
         res.status(400).send({ message: err.message });
       });
   } catch (err) {
-    res.sendStatus(500);
+    res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
   }
 };
 module.exports = exports;
