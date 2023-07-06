@@ -187,6 +187,7 @@ export default function ListSp() {
                   )
                   .then((response) => {
                     if (response.status === 200) {
+                      message.success('Cập nhật thành công!');
                       setRefresh((f) => f + 1);
                       setVisible(false);
                     }
