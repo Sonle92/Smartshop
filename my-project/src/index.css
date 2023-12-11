@@ -30,3 +30,37 @@
   font-size: 14px;
   color: #555;
 }
+/* content trang home */
+.toggle {
+  display: none;
+}
+
+.header {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.contents {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.chill {
+  line-height: 30px;
+  font-size: larger;
+  float: left;
+}
+.image4 {
+  float: right;
+  max-width: 25%;
+  margin-right: 70px;
+  border-radius: 15px;
+  box-shadow: 17px 17px 15px 0px rgb(39, 39, 39);
+}
+.image5 {
+  float: left;
+  max-width: 30%;
+  margin-top: 50px;
+  margin-left: 70px;
+  border-radius: 15px;
+  box-shadow: -15px 16px 15px 0px rgb(39, 39, 39);
+}
