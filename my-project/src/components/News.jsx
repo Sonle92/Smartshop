@@ -34,6 +34,24 @@ const newsData = [
     image:
       "https://blogcdn.muaban.net/wp-content/uploads/2023/05/24225856/iPhone-15-khi-nao-ra-mat-09.jpg",
   },
+  {
+    id: 5,
+    title: "Iphone 15 pro max giá 5 triệu",
+    content:
+      'Nếu như trước đây, iPhone "nhái" chỉ tương đối giống về ngoại hình và có những khác biệt dễ nhận ra, thì hiện tại trên thị trường, "công nghệ làm nhái" ngày càng tinh vi khiến cho người dùng càng khó nhận biết. Với thiết kế được sao chép "nguyên mẫu" từ iPhone thế hệ mới cùng mức giá rẻ chỉ vài triệu đồng, những chiếc iPhone 15 Pro Max hàng nhái có thể đánh lừa những khách hàng cả tin muốn sở hữu iPhone mới với giá hời',
+    image:
+      "https://kenh14cdn.com/thumb_w/300/203336854389633024/2023/12/10/photo1702207433443-17022074336131035760502.jpg",
+  },
+
+  {
+    id: 6,
+    title:
+      "Lộ thiết kế mới của iPhone 16 Pro: Màn hình đục lỗ đẹp mê ly, 4 camera sau đầy ấn tượng",
+    content:
+      "Thời gian qua, các nguồn tin hé lộ Apple đang thử nghiệm một nguyên mẫu iPhone 16 Pro với màn hình đục lỗ. Nguồn tin từ PhoneArena cho biết, phần đục lỗ này là vị trí của camera selfie. Trong khi đó, hệ thống nhận diện khuôn mặt Face ID đã được ẩn ở phía dưới màn hình. Thông tin này khiến không ít người hâm mộ Apple phấn khích và trông đợi sự thay đổi trên thế hệ iPhone tiếp theo. Hình ảnh iPhone 16 Pro với thiết kế đục lỗ đã nhanh chóng được kênh YouTube công nghệ Science & Knowledge phác hoạ.",
+    image:
+      "https://kenh14cdn.com/thumb_w/300/203336854389633024/2023/12/10/photo1702195962256-17021959624271991725432.jpg",
+  },
   // Thêm các tin tức khác tại đây...
 ];
 
