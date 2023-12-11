@@ -52,7 +52,6 @@ const newsData = [
     image:
       "https://kenh14cdn.com/thumb_w/300/203336854389633024/2023/12/10/photo1702195962256-17021959624271991725432.jpg",
   },
-  // Thêm các tin tức khác tại đây...
 ];
 
 // Component tin tức
