@@ -69,7 +69,17 @@ export default function Home() {
             LỊCH SỬ HÌNH THÀNH VÀ PHÁT TRIỂN CỦA IPHONE
           </h1>
           <div className="chill">
-            <div style={{ float: "left", width: "50%", lineHeight: "40px" }}>
+            <div
+              style={{
+                float: "left",
+                width: "50%",
+                lineHeight: "40px",
+                color: "white",
+                backgroundColor: "black",
+                padding: "15px",
+                borderRadius: "50px",
+              }}
+            >
               iPhone là dòng điện thoại thông minh được phát triển từ Apple Inc,
               được ra mắt lần đầu tiên bởi Steve Jobs và mở bán năm 2007. Bên
               cạnh tính năng của một máy điện thoại thông thường, iPhone còn
@@ -85,18 +95,24 @@ export default function Home() {
             IPHONE CÓ NHỮNG MÃ MÁY NÀO?
           </h1>
           <div className="chill">
-            <div style={{ float: "right", width: "50%", lineHeight: "40px" }}>
+            <div
+              style={{
+                float: "right",
+                width: "50%",
+                lineHeight: "40px",
+                color: "white",
+                backgroundColor: "black",
+                padding: "15px",
+                borderRadius: "50px",
+              }}
+            >
               Những chiếc iPhone do Apple phân phối tại thị trường nước nào thì
               sẽ mang mã của nước đó. Ví dụ: LL: Mỹ, ZA: Singapore, TH: Thái
               Lan, JA: Nhật Bản, Những mã này xuất hiện tại Việt Nam đều là hàng
               xách tay, nhập khẩu. Còn tại Việt Nam, iPhone sẽ được mang mã
               VN/A. Tất cả các mã này đều là hàng chính hãng phân phối của
               Apple. Lợi thế khi bạn sử dụng iPhone mã VN/A đó là chế độ bảo
-              hành tốt hơn với 12 tháng theo tiêu chuẩn của Apple. iPhone của
-              bạn sẽ được bảo hành tại tất cả các trung tâm bảo hành Apple tại
-              Việt Nam, một số mã quốc tế bị từ chối bảo hành và phải đem ra các
-              trung tâm bảo hành Apple tại nước ngoài. Rất là phức tạp đúng
-              không nào?
+              hành tốt hơn với 12 tháng theo tiêu chuẩn của Apple.
             </div>
             <img className="image5" src={anh5} alt="" />
           </div>

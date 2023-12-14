@@ -17,20 +17,25 @@ export default function Cart() {
   const cart = useSelector((state) => state.cart);
   const cart1 = useSelector((state) => state.cart.cartTotalQuantity);
   const cart2 = useSelector((state) => state.cart.cartTotalAmount);
+  const cart3 = useSelector((state) => state.cart.cartItems);
+  const cartItemDetails = cart3.map((item) => ({
+    name: item.name,
+    cartQuantity: item.cartQuantity,
+  }));
   const dispatch = useDispatch();
   //khai báo biến form
-  
+
   const [showForm, setShowForm] = useState(false);
-  const  [formData, setFormData] = useState({
-    fullname:"",
+  const [formData, setFormData] = useState({
+    fullname: "",
     phone: "",
     address: "",
-    cartItems: cart,
-    tongtien:0,
-    tongsoluong:0,
+    cartItems: cartItemDetails,
+    tongtien: 0,
+    tongsoluong: 0,
     trangthai: "Đang xử lý",
   });
-//cap nhap lai tong tien va tong san pham
+  //cap nhap lai tong tien va tong san pham
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -41,7 +46,17 @@ export default function Cart() {
   useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
-  
+  useEffect(() => {
+    const updatedCartItems = cart3.map((item) => ({
+      name: item.name,
+      cartQuantity: item.cartQuantity,
+    }));
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      cartItems: updatedCartItems,
+    }));
+  }, [cart3]);
+
   // xóa 1 sản phẩm khỏi giỏ hàng
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart(product));
@@ -49,60 +64,77 @@ export default function Cart() {
   // giảm số lượng sản phẩm
   const handleDecreaseCart = (product) => {
     dispatch(decreaseCart(product));
-    window.location.reload();
+    const updatedCartItems = cart3.map((item) => ({
+      name: item.name,
+      cartQuantity: item.cartQuantity,
+    }));
+    setFormData({
+      ...formData,
+      cartItems: updatedCartItems,
+    });
+    // window.location.reload();
   };
   // tăng số lượng sản phẩm
   const handleAddToCart = (product) => {
     dispatch(addTocart(product));
-    window.location.reload();
+    const updatedCartItems = cart3.map((item) => ({
+      name: item.name,
+      cartQuantity: item.cartQuantity,
+    }));
+    setFormData({
+      ...formData,
+      cartItems: updatedCartItems,
+    });
+    // window.location.reload();
   };
   // xóa tất cả giỏ hàng
   const handleClearCart = () => {
     dispatch(clearCart());
-    window.location.reload();
+    // window.location.reload();
   };
- 
+
   // gửi về admin
   const handleChange = (event) => {
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value
-
+      [event.target.name]: event.target.value,
     });
   };
 
-  const handleFormSubmit =  (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log(formData.tongsoluong);
+
     // Xử lý dữ liệu khi người dùng gửi form
-    const url = 'http://localhost:7000/customer';
+    const url = "http://localhost:7000/customer";
     const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
     };
-
+    console.log(requestOptions);
     fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Xử lý kết quả từ server (nếu cần)
-        console.log(formData)
-        alert("Bạn đã mua hàng thành công.Đơn hàng sẽ được giao trong vào 3-4 ngày tới.Xin cảm ơn")
-        
+        console.log(data);
+        alert(
+          "Bạn đã mua hàng thành công.Đơn hàng sẽ được giao trong vào 3-4 ngày tới.Xin cảm ơn"
+        );
       })
-      .catch(error => {
+      .catch((error) => {
         // Xử lý lỗi (nếu có)
-        alert("Lỗi ",error)
-        console.error('Error:', error);
+        alert("Lỗi ", error);
+        console.error("Error:", error);
       });
-
-      setShowForm(false); 
-      dispatch(clearCart());     
+    setShowForm(false);
+    dispatch(clearCart());
   };
 
   const handleClick = () => {
     setShowForm(true);
-    console.log(formData)
+    console.log(formData);
+    console.log(cartItemDetails);
   };
   return (
     <div className="cart-container">
@@ -189,7 +221,7 @@ export default function Cart() {
               </p>
               <button onClick={handleClick}>Thanh toán</button>
               <div className="continue-shopping">
-                <Link to="/">
+                <Link to="/product">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -225,7 +257,7 @@ export default function Cart() {
                 onChange={handleChange}
               />
               <div className="cut"></div>
-              <label  htmlFor="name" className="placeholder">
+              <label htmlFor="name" className="placeholder">
                 Tên khách hàng
               </label>
             </div>
@@ -240,7 +272,7 @@ export default function Cart() {
                 onChange={handleChange}
               />
               <div className="cut"></div>
-              <label  htmlFor="phone" className="placeholder">
+              <label htmlFor="phone" className="placeholder">
                 Số điện thoại
               </label>
             </div>
@@ -255,11 +287,11 @@ export default function Cart() {
                 onChange={handleChange}
               />
               <div className="cut cut-short"></div>
-              <label  htmlFor="address"  className="placeholder">
+              <label htmlFor="address" className="placeholder">
                 Địa chỉ
               </label>
             </div>
-            <button type="text" className="submit" >
+            <button type="text" className="submit">
               Mua hàng
             </button>
           </form>
