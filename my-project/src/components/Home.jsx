@@ -1,14 +1,11 @@
 import React from "react";
-import Slide from "./Slide";
-import anh1 from "../image/slide1.png";
-import anh2 from "../image/slide6.jpg";
-import anh3 from "../image/slide7.jpg";
 import banner1 from "../image/banner.jpg";
 import banner2 from "../image/banner14s.jpg";
 import banner3 from "../image/banner15.jpg";
 import anh4 from "../image/stevenjob.jpg";
 import anh5 from "../image/anh5.jpg";
 import "../index.css";
+import Slideshow from "./SlideShow";
 const newsData = [
   {
     id: 1,
@@ -46,7 +43,7 @@ export default function Home() {
   return (
     <div>
       <div>
-        <Slide sl1={anh1} sl2={anh2} sl3={anh3} />
+        <Slideshow />
       </div>
       <div className="news-page">
         <div style={{ display: "flex" }}>
