@@ -1,7 +1,6 @@
-body{
+body {
   margin: 0;
   background-color: rgb(216, 214, 214);
-  
 }
 /* Header */
 .Nav {
@@ -74,31 +73,35 @@ body{
   padding: 20px 0px 0px 0px;
 }
 .button {
-    width: 150px;
-    height: 50px;
-    font-size: 20px;
-    color:white;
-    border: 3px solid #5d5c5c;
-    background-image: -webkit-linear-gradient(30deg, #0b0a0b 50%, transparent 50%);
-    background-image: linear-gradient(30deg, #0e0d0e 50%, transparent 50%);
-    background-size: 500px;
-    background-repeat: no-repeat;
-    background-position: 0%;
-    -webkit-transition: background 300ms ease-in-out;
-    transition: background 300ms ease-in-out;
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  color: white;
+  border: 3px solid #5d5c5c;
+  background-image: -webkit-linear-gradient(
+    30deg,
+    #0b0a0b 50%,
+    transparent 50%
+  );
+  background-image: linear-gradient(30deg, #0e0d0e 50%, transparent 50%);
+  background-size: 500px;
+  background-repeat: no-repeat;
+  background-position: 0%;
+  -webkit-transition: background 300ms ease-in-out;
+  transition: background 300ms ease-in-out;
 }
 .button:hover {
-    background-position: 100%;
-    color: rgb(0, 0, 0);
+  background-position: 100%;
+  color: rgb(0, 0, 0);
 }
-.product_list{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 30px 0px 30px 0px;
-    flex-wrap: wrap;
+.product_list {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 0px 30px 0px;
+  flex-wrap: wrap;
 }
-.ProductItem{
+.ProductItem {
   height: 300px;
   background-color: white;
   border-radius: 15px;
@@ -108,29 +111,37 @@ body{
   animation-duration: 1.5s;
   transform-origin: bottom;
 }
-.ProductItem:hover{
+.ProductItem:hover {
   animation-name: bounce;
   animation-timing-function: ease;
 }
 @keyframes bounce {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
-.name,.price,.stock{
+.name,
+.price,
+.stock {
   margin: 0px 0px 0px 20px;
   line-height: 30px;
   font-size: 17px;
 }
-.name{
+.name {
   font-weight: 900;
 }
-.price{
+.price {
   font-family: Arial, Helvetica, sans-serif;
   color: #0066cc;
   font-weight: 600;
 }
-.stock{
+.stock {
   font-weight: 500;
 }
 /* Slide */
@@ -141,37 +152,41 @@ body{
   margin: 0 auto;
 }
 .slide_wrapper {
-  width:3789px;
+  width: 3789px;
   animation: slide 14s ease infinite;
 }
-
-.slide {
-  float: left;
-  height: 510px;
-  width: 1263px;
-}
 @keyframes slide {
-  20% {margin-left: 0px;}
-  30% {margin-left: -1263px;}
-  50% {margin-left: -1263px;}
-  60% {margin-left: -2526px;}
-  80% {margin-left: -2526px;}
+  20% {
+    margin-left: 0px;
+  }
+  30% {
+    margin-left: -1263px;
+  }
+  50% {
+    margin-left: -1263px;
+  }
+  60% {
+    margin-left: -2526px;
+  }
+  80% {
+    margin-left: -2526px;
+  }
 }
-.buy{
+.buy {
   width: 100px;
   height: 30px;
-  background-color:black;
+  background-color: black;
   color: white;
   border: none;
   border-radius: 10px;
   position: relative;
   left: 50px;
 }
-.buy:hover{
+.buy:hover {
   background-color: rgb(17, 234, 49);
   color: black;
 }
-.buy1{
+.buy1 {
   position: absolute;
 }
 /* Giỏ Hàng */

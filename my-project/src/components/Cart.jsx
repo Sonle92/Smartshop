@@ -22,6 +22,7 @@ export default function Cart() {
     name: item.name,
     cartQuantity: item.cartQuantity,
   }));
+
   const dispatch = useDispatch();
   //khai báo biến form
 
@@ -101,40 +102,63 @@ export default function Cart() {
     });
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.tongsoluong);
+    //code moi sua
+    let hasError = false;
+    try {
+      for (const item of cart3) {
+        const productId = item.id;
+        const quantityPurchased = item.cartQuantity;
 
-    // Xử lý dữ liệu khi người dùng gửi form
-    const url = "http://localhost:7000/customer";
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    };
-    console.log(requestOptions);
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        // Xử lý kết quả từ server (nếu cần)
-        console.log(data);
-        alert(
-          "Bạn đã mua hàng thành công.Đơn hàng sẽ được giao trong vào 3-4 ngày tới.Xin cảm ơn"
+        await axios.patch(
+          `http://localhost:7000/product/update-inventory/${productId}`,
+          {
+            quantity: quantityPurchased,
+          }
         );
-      })
-      .catch((error) => {
-        // Xử lý lỗi (nếu có)
-        alert("Lỗi ", error);
-        console.error("Error:", error);
-      });
-    setShowForm(false);
-    dispatch(clearCart());
+      }
+    } catch (error) {
+      if (error.response.status === 400) {
+        alert("Số lượng sản phẩm trong giỏ hàng vượt quá số lượng tồn kho.");
+        hasError = true;
+        window.location.reload();
+      } else {
+        alert("Có lỗi xảy ra khi cập nhật số lượng tồn kho.");
+        hasError = true;
+        window.location.reload();
+      }
+    }
+    // thêm hasError ở dưới
+    if (!hasError) {
+      // Xử lý dữ liệu khi người dùng gửi form
+      const url = "http://localhost:7000/customer";
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      };
+      fetch(url, requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          // Xử lý kết quả từ server (nếu cần)
+          console.log(data);
+          alert(
+            "Bạn đã mua hàng thành công.Đơn hàng sẽ được giao trong vào 3-4 ngày tới.Xin cảm ơn"
+          );
+        })
+        .catch((error) => {
+          // Xử lý lỗi (nếu có)
+          alert("Lỗi ", error);
+          console.error("Error:", error);
+        });
+      setShowForm(false);
+      dispatch(clearCart());
+    }
   };
 
   const handleClick = () => {
     setShowForm(true);
-    console.log(formData);
-    console.log(cartItemDetails);
   };
   return (
     <div className="cart-container">
