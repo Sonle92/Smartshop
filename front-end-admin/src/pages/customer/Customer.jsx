@@ -29,6 +29,36 @@ export default function Customer() {
   const [createForm] = Form.useForm();
   const [updateForm] = Form.useForm();
 
+  //code moi sua ,cap nhat ton kho
+  const [totalQuantity, setTotalQuantity] = React.useState(0);
+  const [totalCost, setTotalCost] = React.useState(0);
+
+  React.useEffect(() => {
+    axiosClient.get("/customer").then((response) => {
+      setCustomer(response.data);
+
+      // Calculate total quantity and total cost
+      let quantity = 0;
+      let cost = 0;
+
+      response.data.forEach((customerItem) => {
+        const cartItems = customerItem.cartItems || [];
+        cartItems.forEach((item) => {
+          if (customerItem.trangthai == "Giao hàng") {
+            quantity += item.cartQuantity || 0;
+          }
+        });
+        if (customerItem.trangthai == "Giao hàng") {
+          cost += customerItem.tongtien || 0;
+        }
+      });
+
+      setTotalQuantity(quantity);
+      setTotalCost(cost);
+    });
+  }, [refresh]);
+  //code moi sua ,cap nhat ton kho
+
   //TẠO BẢNG
   const columns = [
     {
@@ -165,7 +195,6 @@ export default function Customer() {
   React.useEffect(() => {
     axiosClient.get("/customer").then((response) => {
       setCustomer(response.data);
-      // console.log(response.data);
     });
   }, [refresh]);
   // POST DỮ LIỆU
@@ -259,12 +288,6 @@ export default function Customer() {
           <Form.Item label="Địa chỉ liên hệ" name="address">
             <Input />
           </Form.Item>
-          <Form.Item label="Tổng số lượng sản phẩm" name="tongsoluong">
-            <InputNumber />
-          </Form.Item>
-          <Form.Item label="Tổng thanh toán" name="tongtien">
-            <InputNumber />
-          </Form.Item>
           <Form.Item
             label="Trạng thái"
             name="trangthai"
@@ -302,6 +325,51 @@ export default function Customer() {
           </Form.Item>
         </Form>
       </Modal>
+      <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "end",
+            marginRight: "255px",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              left: "300px",
+              marginTop: "15px",
+              fontSize: "20px",
+            }}
+          >
+            TỔNG THU NHẬP
+          </div>
+          <div>
+            <p>
+              <span
+                style={{
+                  fontWeight: "blod",
+                  color: "white",
+                  position: "absolute",
+                  left: "300px",
+                }}
+              ></span>{" "}
+              {totalQuantity}
+            </p>
+          </div>
+          <div>
+            <p>
+              <span
+                style={{
+                  marginLeft: "140px",
+                  fontWeight: "blod",
+                }}
+              ></span>{" "}
+              {numeral(totalCost).format("0,0")}đ
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
