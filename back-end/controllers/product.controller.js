@@ -97,4 +97,38 @@ exports.deleteProduct = async (req, res, next) => {
     res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
   }
 };
+// them update ton kho
+exports.updateInventory = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { quantity } = req.body; // Lấy productId và quantity từ request body
+    // Tìm sản phẩm trong cơ sở dữ liệu dựa trên productId
+    const product = await Product.findById(id);
+
+    if (!product) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Product not found." });
+    }
+
+    if (product.stock < quantity) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "Insufficient stock." });
+    }
+
+    // Giảm số lượng tồn kho và lưu lại vào cơ sở dữ liệu
+    product.stock -= quantity;
+    await product.save();
+
+    return res
+      .status(StatusCodes.OK)
+      .json({ message: "Stock updated successfully." });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Failed to update inventory." });
+  }
+};
 module.exports = exports;
