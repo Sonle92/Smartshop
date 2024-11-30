@@ -68,6 +68,7 @@ export default function Customer() {
       render: (text, record) => {
         return <strong>{record?.fullname}</strong>;
       },
+      sorter: (a, b) => a.fullname.localeCompare(b.fullname),
     },
     {
       title: "Số điện thoại",
@@ -76,6 +77,7 @@ export default function Customer() {
       render: (text) => {
         return <span>{text}</span>;
       },
+      sorter: (a, b) => a.phone.localeCompare(b.phone),
     },
     {
       title: "Địa chỉ liên hệ",
@@ -84,6 +86,7 @@ export default function Customer() {
       render: (text) => {
         return <span>{text}</span>;
       },
+      sorter: (a, b) => a.address.localeCompare(b.address), 
     },
     {
       title: "Mặt hàng đã đặt",
@@ -108,6 +111,7 @@ export default function Customer() {
       render: (text) => {
         return <span>{text}</span>;
       },
+      sorter: (a, b) => a.tongsoluong - b.tongsoluong, 
     },
     {
       title: "Tổng thanh toán",
@@ -116,6 +120,7 @@ export default function Customer() {
       render: (text) => {
         return <span>{numeral(text).format("0,0")}đ</span>;
       },
+      sorter: (a, b) => a.tongtien - b.tongtien,
     },
     {
       title: "Trạng thái",
@@ -124,6 +129,7 @@ export default function Customer() {
       render: (text) => {
         return <span>{text}</span>;
       },
+      sorter: (a, b) => a.trangthai.localeCompare(b.trangthai),
     },
     {
       title: "",
